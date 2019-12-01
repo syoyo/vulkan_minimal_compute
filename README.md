@@ -24,3 +24,16 @@ should use CMake to generate a "Visual Studio Solution"/makefile,
 and then use that to compile the program. If you then run the program,
 a file named `mandelbrot.png` should be created. This is a Mandelbrot
 set that has been rendered by using Vulkan. 
+
+## Building with SwiftShader
+
+Assume Linux environment.
+
+```
+$ git submodule update --init --recursive
+$ ./scripts/bootstrap-linux.sh
+$ cd build
+$ make
+```
+
+
