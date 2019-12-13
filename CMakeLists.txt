@@ -16,12 +16,11 @@ set(BUILD_WSI_XLIB_SUPPORT OFF CACHE INTERNAL "" FORCE)
 set(BUILD_WSI_WAYLAND_SUPPORT oFF CACHE INTERNAL "" FORCE)
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/Vulkan-Loader)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/swiftshader)
-
 set(Vulkan_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/third_party/Vulkan-Headers/include)
 include_directories(${Vulkan_INCLUDE_DIR})
-
-#set(ALL_LIBS  ${Vulkan_LIBRARY} )
+  
+# [swiftshader]
+add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/swiftshader)
 
 add_executable(vulkan_minimal_compute src/main.cpp src/lodepng.cpp)
 

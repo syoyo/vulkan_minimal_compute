@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <stdexcept>
 #include <cmath>
+#include <iostream>
 
 #include "lodepng.h" //Used for png encoding.
 
@@ -193,6 +194,7 @@ public:
         is used incorrectly. We shall enable the layer VK_LAYER_LUNARG_standard_validation,
         which is basically a collection of several useful validation layers.
         */
+        std::cout << "Enable validation layers " << enableValidationLayers << "\n";
         if (enableValidationLayers) {
             /*
             We get all supported layers with vkEnumerateInstanceLayerProperties.
@@ -277,6 +279,7 @@ public:
         createInfo.enabledExtensionCount = enabledExtensions.size();
         createInfo.ppEnabledExtensionNames = enabledExtensions.data();
     
+        std::cout << "vkCreateInstance\n";
         /*
         Actually create the instance.
         Having created the instance, we can actually start using vulkan.
@@ -286,6 +289,7 @@ public:
             NULL,
             &instance));
 
+        std::cout << "vkCreateInstance done\n";
         /*
         Register a callback function for the extension VK_EXT_DEBUG_REPORT_EXTENSION_NAME, so that warnings emitted from the validation
         layer are actually printed.
@@ -593,7 +597,8 @@ public:
 
         // read file contents.
         char *str = new char[filesizepadded];
-        fread(str, filesize, sizeof(char), fp);
+        size_t n = fread(str, filesize, sizeof(char), fp);
+         (void)n;
         fclose(fp);
 
         // data padding. 

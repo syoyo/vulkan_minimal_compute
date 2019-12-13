@@ -36,4 +36,41 @@ $ cd build
 $ make
 ```
 
+### Run with SwiftShader
 
+Put built `vk_swiftshader_icd.json` and `libvk_swiftshader.so` to the root dir of this repo, then:
+
+```
+$ export VK_ICD_FILENAMES=vk_swiftshader_icd.json
+$ ./build/vulkan_minimal_compute
+```
+
+You may need to add `.` to `LD_LIBRARY_PATH` variable.
+
+### Building Vulan-ValidationLayers
+
+SwiftShader and Vulkan-Loader itself does not include Validation Layers implementation.
+To use Vulkan-ValidatonLayers, you can build it using 
+
+```
+$ ./scripts/build-validation-layers-linux.sh
+```
+
+glslang and Vulkan-ValidationLayers will be built into `dist` directory.
+
+Then, set `VK_LAYER_PATH` and `VK_INSTANCE_LAYERS` and run vulkan app.
+
+Also, you need to add path to validation layer .so folder(`dist/lib/`) through `LD_LIBRARY_PATH`.
+
+Example setting is like this(do this in the root dir of this repo).
+
+```
+$ export VK_LAYER_PATH=`pwd`/dist/share/vulkan/explicit_layer.d/
+$ export VK_INSTANCE_LAYERS=VK_LAYER_LUNARG_standard_validation
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`/dist/lib
+
+# If you didn't set `VK_ICD_FILENAMES`, set it to use swiftshader.
+# export VK_ICD_FILENAMES=vk_swiftshader_icd.json
+
+$ ./build/vulkan_minimal_compute
+```

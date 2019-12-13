@@ -6,7 +6,10 @@ mkdir build
 
 cd build
 
-cmake ../
+#cmake ../
+
+# Debug build requires Vulkan ValidationLayers when running the app.
+cmake -DCMAKE_BUILD_TYPE=Debug ../
 
 cd ..
 
